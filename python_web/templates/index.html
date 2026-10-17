@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrbitLab</title>
+    <link href="/static/styles.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-wrapper">
+            <div class="logo-info">
+                <div class="logo-wrapper">
+                    <img class="logo-img" src="./static/orbitlab-icon.svg" alt="OrbitLab" width="48" height="48">
+                    <p class="logo-text">OrbitLab</p>
+                </div>
+                <p class="subtitle">Orbital simulation</p>
+            </div>
+            <div class="header-list">
+                <p class="subtitle" >Explore</p>
+                <p class="subtitle" >Compute</p>
+                <p class="subtitle" >Visualize</p>
+            </div>
+        </div>
+    </header>
+        <main>
+            <div class="container">
+                <!-- Окно симуляции -->
+                <div class="simulation">
+                    <img id="orbit-animation" src="" alt="Orbit will appear here" style="display: none; max-width: 100%;">
+                </div>
+                
+                <!-- Правая панель параметров -->
+                <div class="form">
+                    <form class="simulation-form" action="/run" method="POST">
+                        <h2>Parameters</h2>
+                        
+                        <div class="form-group">
+                            <label for="x_position">X position</label>
+                            <input name="x_position" id="x_position" type="text" id="x-pos" value="1.0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="y_position">Y position</label>
+                            <input name="y_position" id="y_position" type="text" id="y-pos" value="0.0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="x_velocity">X velocity</label>
+                            <input name="x_velocity" id="x_velocity" type="text" id="x-vel" value="0.0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="y_velocity">Y velocity</label>
+                            <input name="y_velocity" id="y_velocity" type="text" id="y-vel" value="1.0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="delta_time">Delta time (Δt)</label>
+                            <input name="delta_time" id="delta_time" type="text" id="delta-time" value="0.01">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="simulation_time">Simulation time</label>
+                            <input name="simulation_time" id="simulation_time" type="text" id="sim-time" value="20.0">
+                        </div>
+
+                        <button name="start-btn" id="start-btn" type="submit">▶ Start</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    <footer></footer>
+    <script>
+
+        const startButton = document.getElementById('start-btn');
+
+        startButton.addEventListener('click', function(event) {
+            
+            event.preventDefault();
+
+            let x_position = document.getElementById('x_position').value;
+            let y_position = document.getElementById('y_position').value;
+            let x_velocity = document.getElementById('x_velocity').value;
+            let y_velocity = document.getElementById('y_velocity').value;
+            let delta_time = document.getElementById('delta_time').value;
+            let simulation_time = document.getElementById('simulation_time').value;
+
+            let inputData = {
+                "x_position": x_position,
+                "y_position": y_position,
+                "x_velocity": x_velocity,
+                "y_velocity": y_velocity,
+                "delta_time": delta_time,
+                "simulation_time": simulation_time
+            };
+
+            let jsonText = JSON.stringify(inputData);
+
+            fetch('/run', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                body: jsonText 
+            })
+            .then(response => response.json()) 
+            .then(data => {
+                console.log("Ответ от Питона получен:", data);
+
+                if (data.status === "success") {
+                    const imgElement = document.getElementById('orbit-animation');
+                    imgElement.src = data.animation;
+                    imgElement.style.display = "block";
+                } else {
+                    alert("The error of simulation: " + data.message);
+                }
+            });
+        });
+        
+    </script>
+</body>
+</html>

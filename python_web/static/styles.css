@@ -1,0 +1,123 @@
+:root {
+    --bg-primary: #080D17;
+    --bg-simulation: #060A12;
+    --bg-panel: #0D1422;
+    --border: #1C2739;
+    --accent: #3B6EFF;
+    --accent-light: #69A2FF;
+    --accent-dark: #315CFF;
+    --text-primary: #F0F5FF;
+    --text-secondary: #8493AD;
+}
+
+body{
+    background-color: #080D17;
+    color: #F0F5FF;
+    font-family: Inter, sans-serif;
+    padding: 0px 20px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.header-wrapper, .logo-info, .header-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* Растягивает симуляцию по высоте формы */
+    gap: 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.simulation{
+    flex-grow: 1;
+    background-color: var(--bg-simulation);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    min-height: 400px;
+}
+
+#orbit-animation{
+    width: 100%;
+    height: 100%;
+}
+
+.simulation-form {
+    background-color: var(--bg-panel);
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    width: 320px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.simulation-form button[type="submit"] {
+    margin-top: 8px; /* Небольшой отступ от последнего инпута */
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.logo-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-text{
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.subtitle{
+    color: #8493AD;
+}
+
+.header-list p + p::before {
+    content: "•";
+    margin-right: 12px;
+    color: #3B6EFF;
+}
+
+.simulation-form{
+    background-color: #0D1422;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid #1C2739;
+    max-width: 300px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column; /* Выстраивает элементы вертикально */
+  margin-bottom: 15px;    /* Расстояние между группами полей */
+}
+
+.form-group label {
+  margin-bottom: 5px;     /* Расстояние между заголовком и инпутом */
+  color: #a0a0a0;         /* Серый цвет как на скриншоте */
+  font-size: 14px;
+}
+
+.form-group input {
+  padding: 10px;
+  background-color: #141d30; /* Темный фон для инпута */
+  border: 1px solid #232836;
+  border-radius: 6px;
+  color: #fff;
+}

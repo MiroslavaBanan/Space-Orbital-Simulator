@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" fill="none">
+  <defs>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="4.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="orbitStroke" x1="14" y1="22" x2="79" y2="72" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#69A2FF"/><stop offset="1" stop-color="#315CFF"/>
+    </linearGradient>
+  </defs>
+  <g filter="url(#glow)" transform="rotate(-34 48 48)">
+    <ellipse cx="48" cy="48" rx="31" ry="16.5" stroke="url(#orbitStroke)" stroke-width="4"/>
+    <path d="M18 48.5C24 58 35 64.5 48 64.5" stroke="#8CB8FF" stroke-width="2" stroke-linecap="round" opacity=".75"/>
+  </g>
+</svg>
