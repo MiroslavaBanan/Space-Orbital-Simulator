@@ -28,12 +28,12 @@
     </header>
         <main>
             <div class="container">
-                <!-- Окно симуляции -->
+                <!-- Block with simulation -->
                 <div class="simulation">
                     <img id="orbit-animation" src="" alt="Orbit will appear here" style="display: none; max-width: 100%;">
                 </div>
                 
-                <!-- Правая панель параметров -->
+                <!-- Panel with parametres -->
                 <div class="form">
                     <form class="simulation-form" action="/run" method="POST">
                         <h2>Parameters</h2>
@@ -78,10 +78,13 @@
 
         const startButton = document.getElementById('start-btn');
 
+        // Active a function after click
         startButton.addEventListener('click', function(event) {
             
+            // Prevent a reloading of page to collect data from parametres
             event.preventDefault();
 
+            // Make a variable for each parameter
             let x_position = document.getElementById('x_position').value;
             let y_position = document.getElementById('y_position').value;
             let x_velocity = document.getElementById('x_velocity').value;
@@ -89,6 +92,7 @@
             let delta_time = document.getElementById('delta_time').value;
             let simulation_time = document.getElementById('simulation_time').value;
 
+            // Make a dictionary out of variables to be able to make a JSON file
             let inputData = {
                 "x_position": x_position,
                 "y_position": y_position,
@@ -98,8 +102,10 @@
                 "simulation_time": simulation_time
             };
 
+            // Make a JSON file
             let jsonText = JSON.stringify(inputData);
 
+            // Send JSON to python
             fetch('/run', {
                 method: 'POST',
                 headers: {
@@ -109,7 +115,7 @@
             })
             .then(response => response.json()) 
             .then(data => {
-                console.log("Ответ от Питона получен:", data);
+                console.log("Answer from python:", data);
 
                 if (data.status === "success") {
                     const imgElement = document.getElementById('orbit-animation');

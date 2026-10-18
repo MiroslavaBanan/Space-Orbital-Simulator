@@ -34,7 +34,6 @@ def run_simulation():
     # Making a string for C
     input_string = f"{x_position}\n{y_position}\n{x_velocity}\n{y_velocity}\n{delta_time}\n{simulation_time}\n"
 
-
     # Send this string to C
     result = subprocess.run(
     ["./orbit"],
@@ -44,7 +43,7 @@ def run_simulation():
     cwd=C_BACKEND
 )
 
-    print("Код возврата Си:", result.returncode)
+    print("C output:", result.returncode)
 
     # Print an error if something wrong
     if result.returncode != 0:
@@ -68,10 +67,11 @@ def run_simulation():
     fig, ax = plt.subplots(facecolor=site_bg)
     ax.set_facecolor(site_bg)
 
-    # Setting a blue shining line
+    # Make a blue shining line
     line, = ax.plot([], [], color='#007aff', linewidth=3)
     earth = plt.Circle((0, 0), 6371000, color='#1a365d', alpha=0.8)
 
+    # Make a circle (Earth) and a dot for line
     ax.add_patch(earth)
     dot, = ax.plot([], [], 'o', color='#00ffff', markersize=6)
 
@@ -81,6 +81,7 @@ def run_simulation():
         6371000
     ) if len(df) > 0 else 7000000
 
+    # Adjusting the scale of the simulation
     view_limit = max_val * 1.2
 
     ax.set_xlim(-view_limit, view_limit)

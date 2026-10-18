@@ -28,12 +28,12 @@ void calculate_physics(PointObject *obj, struct unchanged_values consts, double 
 int main(void)
 {
 
-    // расстояние — метры (m)
-    // время — секунды (s)
-    // скорость — метры/секунду (m/s)
-    // ускорение — метры/секунду² (m/s²)
-    // масса — килограммы (kg)
-    // сила — ньютоны (N)
+    // Distance - meters (m)
+    // Time - seconds (s)
+    // Velocity — meters per second (m/s)
+    // Acceleration — meters per second squared (m/s²)
+    // Mass — kilograms (kg)
+    // Force — newtons (N)
 
     // Const values
     struct unchanged_values constants = { 6.6743e-11, 5.972e24 };
@@ -113,13 +113,9 @@ void calculate_physics(PointObject *obj, struct unchanged_values consts, double 
     obj->acceleration.x = a * (-obj->position.x / r);
     obj->acceleration.y = a * (-obj->position.y / r);
 
-    // Изменяю скорость за еденицу времени в зависимости от того какое ускорение направлено на эту ось
-    // Здесь мы пытаемся понять как изменится изначально заданная скорость с появлением ускорения 
-    // направленного именно на эту ось x или y за единицу времени
     obj->velocity.x += obj->acceleration.x * delta;
     obj->velocity.y += obj->acceleration.y * delta;
 
-    // Изменяю положение обьекта по осям взависимости от того как изменилась его скорость за еденицу времени
     obj->position.x += (obj->velocity.x * delta);
     obj->position.y += (obj->velocity.y * delta);
 }
